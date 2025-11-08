@@ -1,0 +1,38 @@
+/* CyberCard.css */
+
+.card {
+    width: 300px;
+    height: 400px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #111, #333);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card:hover {
+    transform: translateY(-10px); /* Légère élévation au survol */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #0f0, #00f, #f00);
+  }
+  
+  .card-content {
+    color: white;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .card-description {
+    font-size: 16px;
+  }
+  
