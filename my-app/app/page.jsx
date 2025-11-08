@@ -21,9 +21,9 @@ export default function Home() {
     },
     {
       id: "project-2",
-      title: "DevOps Pipeline",
+      title: "API REST Webservice",
       description: "Automatisation CI/CD avec Docker et Kubernetes.",
-      imgSrc: "/assets/project3.jpg",
+      imgSrc: "/asset/annexes-pprod.png",
       githubLink: "https://github.com/votre-compte/devops-pipeline",
       details:
         "Mise en place d'une chaîne d'intégration et de déploiement continue automatisée. Utilisation de Jenkins, Docker, Kubernetes et Terraform.",
@@ -32,7 +32,7 @@ export default function Home() {
       id: "project-3",
       title: "E-commerce Platform",
       description: "Plateforme de commerce électronique complète.",
-      imgSrc: "/assets/project4.jpg",
+      imgSrc: "/assets/project-watch.png",
       githubLink: "https://github.com/votre-compte/e-commerce-platform",
       details:
         "Développement d'une plateforme e-commerce avec panier, paiement et gestion des commandes. Stack : React, Redux, Node.js, MongoDB.",
