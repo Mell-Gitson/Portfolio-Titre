@@ -5,35 +5,39 @@ import styled from "styled-components";
 import ProjectModal from "./ProjectModal";
 
 const neonColors = [
-  {
-    bg: "hsl(180, 100%, 25%)",
+  { 
+    bg: "hsl(180, 100%, 25%)", 
     glow: "0px 0px 20px hsla(180, 100%, 50%, 0.8), 0px 0px 40px hsla(180, 100%, 50%, 0.4)",
-    border: "hsl(180, 100%, 50%)",
+    border: "hsl(180, 100%, 50%)"
   },
-  {
-    bg: "hsl(190, 100%, 20%)",
+  { 
+    bg: "hsl(190, 100%, 20%)", 
     glow: "0px 0px 20px hsla(190, 100%, 45%, 0.8), 0px 0px 40px hsla(190, 100%, 45%, 0.4)",
-    border: "hsl(190, 100%, 45%)",
+    border: "hsl(190, 100%, 45%)"
   },
-  {
-    bg: "hsl(170, 100%, 25%)",
+  { 
+    bg: "hsl(170, 100%, 25%)", 
     glow: "0px 0px 20px hsla(170, 100%, 50%, 0.8), 0px 0px 40px hsla(170, 100%, 50%, 0.4)",
-    border: "hsl(170, 100%, 50%)",
+    border: "hsl(170, 100%, 50%)"
   },
-  {
-    bg: "hsl(200, 100%, 20%)",
+  { 
+    bg: "hsl(200, 100%, 20%)", 
     glow: "0px 0px 20px hsla(200, 100%, 45%, 0.8), 0px 0px 40px hsla(200, 100%, 45%, 0.4)",
-    border: "hsl(200, 100%, 45%)",
+    border: "hsl(200, 100%, 45%)"
   },
 ];
 
-const Card = ({
-  projectId,
-  title,
-  description,
-  image,
-  index,
-  projectDetails,
+const Card = ({ 
+  projectId, 
+  title, 
+  description, 
+  image,           
+  link, 
+  demo, 
+  githubButton, 
+  reactButton, 
+  index, 
+  projectDetails 
 }) => {
   const colorStyle = neonColors[index % neonColors.length];
   const [showModal, setShowModal] = useState(false);
@@ -43,18 +47,15 @@ const Card = ({
   };
 
   return (
-    <StyledWrapper
-      $bgColor={colorStyle.bg}
-      $glowColor={colorStyle.glow}
-      $borderColor={colorStyle.border}
-    >
+    <StyledWrapper $bgColor={colorStyle.bg} $glowColor={colorStyle.glow} $borderColor={colorStyle.border}>
       <div className="parent">
+        {/* Zone cliquable visible */}
         <div className="card relative cursor-pointer" onClick={openModal}>
           <div className="absolute inset-0 rounded-2xl overflow-hidden">
             <img
               src={image || "/assets/fallback.png"}
               alt={title}
-              className="w-full h-full object-cover opacity-30"
+              className="w-full h-full object-cover opacity-20"
             />
           </div>
           <div className="glass" />
@@ -64,11 +65,11 @@ const Card = ({
           </div>
         </div>
 
-        {/* Modal du projet */}
+        {/* Modal */}
         {showModal && (
-          <ProjectModal
-            project={projectDetails}
-            onClose={() => setShowModal(false)}
+          <ProjectModal 
+            project={projectDetails} 
+            onClose={() => setShowModal(false)} 
           />
         )}
       </div>
@@ -87,15 +88,13 @@ const StyledWrapper = styled.div`
     height: 100%;
     border-radius: 50px;
     background: ${(props) => props.$bgColor};
-    transition: transform 0.3s ease, box-shadow 0.3s ease,
-      border-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     position: relative;
     border: 2px solid ${(props) => props.$borderColor};
 
     &:hover {
       transform: translateY(-5px) scale(1.02);
-      box-shadow: ${(props) => props.$glowColor},
-        0px 8px 15px rgba(0, 0, 0, 0.4);
+      box-shadow: ${(props) => props.$glowColor}, 0px 8px 15px rgba(0, 0, 0, 0.4);
       border-color: ${(props) => props.$borderColor};
     }
   }
@@ -131,30 +130,6 @@ const StyledWrapper = styled.div`
       margin-top: 15px;
       text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
       line-height: 1.4;
-    }
-  }
-
-  .bottom {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-
-    .comment-button {
-      background: rgba(0, 0, 0, 0.4);
-      color: white;
-      padding: 8px 12px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background: rgba(0, 255, 255, 0.3);
-        border-color: rgba(0, 255, 255, 0.7);
-        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        transform: translateY(-1px);
-      }
     }
   }
 `;

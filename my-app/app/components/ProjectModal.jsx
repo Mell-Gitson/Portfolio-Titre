@@ -1,94 +1,71 @@
-// app/components/ProjectModal.jsx
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import Comments from "./Comments"; 
-import { SiGithub } from "react-icons/si"; 
-
-const modalVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0.8 },
-};
+import Comments from "./Comments";
+import { SiGithub } from "react-icons/si";
 
 const backdropVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
 };
 
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1 },
+};
+
 export default function ProjectModal({ project, onClose }) {
   if (!project) return null;
 
-  const handleClose = () => {
-    onClose(); 
-  };
-
   return (
     <motion.div
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 pt-20"
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
       initial="hidden"
       animate="visible"
-      exit="exit"
+      exit="hidden"
       variants={backdropVariants}
-      onClick={handleClose} 
+      onClick={onClose}
     >
-      
       <motion.div
-        className="bg-darkBg-800 rounded-xl p-6 max-w-4xl w-full shadow-cyan-green-xl border-2 border-cyan-500/50 relative overflow-y-auto max-h-[80vh] mt-4"
+        className="bg-darkBg-800 rounded-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto border-2 border-cyan-500/40"
         variants={modalVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        
         onClick={(e) => e.stopPropagation()}
       >
-        
         <button
-          onClick={handleClose} 
-          className="absolute top-4 right-4 text-red-500 hover:text-red-300 font-bold text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-600/20 transition-all duration-300"
+          onClick={onClose}
+          className="absolute top-4 right-4 text-white bg-red-500/20 p-1 rounded-full hover:bg-red-500/40"
         >
-          × 
+          ✕
         </button>
-        
-        {/* Image du projet */}
-        <div className="mb-6">
-          {project.image && (
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-64 object-cover rounded-lg border-2 border-cyan-500/30"
-            />
-          )}
-        </div>
-        
-        
-        <div className="mb-6">
-          <h3 className="text-2xl font-bold text-cyan-400 mb-3">{project.title}</h3>
-          <p className="text-lightText-200 leading-relaxed mb-4">
-            {project.description}
-          </p>
+
+        {/* Image */}
+        <div className="relative w-full h-64 rounded-lg overflow-hidden border border-cyan-500/30 mb-5">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-contain"
+          />
         </div>
 
-        
-        <div className="mb-6">
+        {/* Contenu */}
+        <h3 className="text-2xl font-bold text-cyan-400 mb-2">{project.title}</h3>
+        <p className="text-lightText-200 mb-4">{project.description}</p>
+
+        {/* GitHub */}
+        {project.githubLink && (
           <a
             href={project.githubLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold rounded-lg hover:shadow-cyan-green hover:scale-105 transition-all duration-300 border border-gray-600"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded hover:bg-white hover:text-gray-900"
           >
-            <SiGithub className="w-5 h-5 mr-2" />
+            <SiGithub size={20} />
             Voir sur GitHub
           </a>
-        </div>
+        )}
 
-        
-        <div className="mt-8 pt-8 border-t border-cyan-500/30">
-          <h4 className="text-xl font-semibold text-cyan-300 mb-4">Commentaires</h4>
-          
-          <Comments projectId={project.id} />
-        </div>
+        {/* Commentaires */}
+        <Comments projectId={project.id} />
       </motion.div>
     </motion.div>
   );
