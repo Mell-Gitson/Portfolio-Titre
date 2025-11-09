@@ -1,4 +1,3 @@
-// components/NeonCard.jsx
 "use client";
 
 import React from "react";
@@ -20,9 +19,9 @@ const NeonCard = () => {
       className="relative bg-darkBg-900 p-6 rounded-xl shadow-neon-green border-2 border-neonGreen-500 animate-border-pulse" 
     >
       
-      <div className="w-[400px] h-[600px] overflow-hidden rounded-xl relative"> {/* Toujours z-0 ou z-10 si nécessaire */}
+      <div className="w-[400px] h-[600px] overflow-hidden rounded-xl relative"> 
         <Image
-          src="/assets/cardmc.png"
+          src="../assets/cardmc.png"
           alt="Carte néon"
           fill
           style={{ objectFit: "cover" }}
