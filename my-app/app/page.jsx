@@ -7,6 +7,7 @@ import { Skills } from "./components/Skills";
 import { Footer } from "./components/Footer";
 import Card from "./components/Card";
 import "./globals.css";
+import NeonButton from "./components/NeonButton";
 
 export default function Home() {
   const projectsData = [
@@ -68,12 +69,15 @@ export default function Home() {
               DevOps
             </span>
           </div>
-          <a
-            href="#about"
-            className="inline-block px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-darkBg-900 font-bold rounded-lg hover:shadow-cyan-green-lg transform hover:scale-105 transition-all duration-300 border-2 border-cyan-500 text-sm md:text-base"
+          <NeonButton
+            as="a"
+            href="/Mell_CANAC_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 w-full item-center"
           >
-            Découvrir mon parcours
-          </a>
+            CV
+          </NeonButton>
         </div>
 
         <div className="hidden md:block">
@@ -195,7 +199,7 @@ export default function Home() {
           {projectsData.map((project, index) => (
             <Card
               key={project.id}
-              projectId={`project-${project.id}`} 
+              projectId={`project-${project.id}`}
               title={project.title}
               description={project.description}
               image={project.image}
@@ -205,7 +209,7 @@ export default function Home() {
               reactButton={false}
               index={index}
               projectDetails={{
-                id: `project-${project.id}`, 
+                id: `project-${project.id}`,
                 title: project.title,
                 description: project.description,
                 image: project.image,

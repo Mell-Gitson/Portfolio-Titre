@@ -4,7 +4,7 @@ import React from "react";
 import Card from "./Card";
 
 export function Projects({ id, title, description, image, index }) {
-  // Mode affichage d’un seul projet (optionnel)
+  
   if (id) {
     return (
       <Card
