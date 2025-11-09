@@ -14,7 +14,7 @@ export default function Home() {
       id: "project-1",
       title: "Dashboard Analyse",
       description: "Tableau de bord analytique avec visualisations de données.",
-      imgSrc: "./assets/devbanière.png",
+      imgSrc: "/assets/devbanière.png",
       githubLink: "https://github.com/votre-compte/dashboard-analyse",
       details:
         "Création d'un tableau de bord interactif pour visualiser des données en temps réel. Utilisation de React, Chart.js et Node.js.",
@@ -23,7 +23,7 @@ export default function Home() {
       id: "project-2",
       title: "API REST Webservice",
       description: "Automatisation CI/CD avec Docker et Kubernetes.",
-      imgSrc: "./asset/annexes-pprod.png",
+      imgSrc: "/asset/annexes-pprod.png",
       githubLink: "https://github.com/votre-compte/devops-pipeline",
       details:
         "Mise en place d'une chaîne d'intégration et de déploiement continue automatisée. Utilisation de Jenkins, Docker, Kubernetes et Terraform.",
@@ -32,7 +32,7 @@ export default function Home() {
       id: "project-3",
       title: "E-commerce Platform",
       description: "Plateforme de commerce électronique complète.",
-      imgSrc: "./assets/project-watch.png",
+      imgSrc: "/assets/project-watch.png",
       githubLink: "https://github.com/votre-compte/e-commerce-platform",
       details:
         "Développement d'une plateforme e-commerce avec panier, paiement et gestion des commandes. Stack : React, Redux, Node.js, MongoDB.",
@@ -41,7 +41,7 @@ export default function Home() {
       id: "project-4",
       title: "Système de Quiz",
       description: "Application interactive de quiz avec système de notation.",
-      imgSrc: "./assets/project5.jpg",
+      imgSrc: "/assets/projet-spotify.png",
       githubLink: "https://github.com/votre-compte/quiz-system",
       details:
         "Création d'un système de quiz interactif avec un système de score et de classement. Techno : React, Firebase, Tailwind CSS.",
