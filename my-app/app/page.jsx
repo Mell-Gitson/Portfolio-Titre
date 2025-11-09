@@ -11,40 +11,34 @@ import "./globals.css";
 export default function Home() {
   const projectsData = [
     {
-      id: "project-1",
-      title: "Dashboard Analyse",
-      description: "Tableau de bord analytique avec visualisations de données.",
-      imgSrc: "/assets/devbanière.png",
-      githubLink: "https://github.com/votre-compte/dashboard-analyse",
-      details:
-        "Création d'un tableau de bord interactif pour visualiser des données en temps réel. Utilisation de React, Chart.js et Node.js.",
+      id: 1,
+      title: "MC2",
+      description:
+        "Application de recherche de films et séries en React et Node.js.",
+      image: "/assets/devbanière.png",
+      githubLink: "https://github.com/Mell-Gitson/MlCinema",
     },
     {
-      id: "project-2",
-      title: "API REST Webservice",
-      description: "Automatisation CI/CD avec Docker et Kubernetes.",
-      imgSrc: "/asset/annexes-pprod.png",
-      githubLink: "https://github.com/votre-compte/devops-pipeline",
-      details:
-        "Mise en place d'une chaîne d'intégration et de déploiement continue automatisée. Utilisation de Jenkins, Docker, Kubernetes et Terraform.",
+      id: 2,
+      title: "dock'uiz",
+      description:
+        "Mise en place d'un environnement Docker dans une appli jeu de quizz",
+      image: "/assets/annexes-pprod.png",
+      githubLink: "https://github.com/Mell-Gitson/Micro-services",
     },
     {
-      id: "project-3",
-      title: "E-commerce Platform",
-      description: "Plateforme de commerce électronique complète.",
-      imgSrc: "/assets/project-watch.png",
-      githubLink: "https://github.com/votre-compte/e-commerce-platform",
-      details:
-        "Développement d'une plateforme e-commerce avec panier, paiement et gestion des commandes. Stack : React, Redux, Node.js, MongoDB.",
+      id: 3,
+      title: "Project Watch",
+      description: "Suivi de projets en temps réel avec WebSockets.",
+      image: "/assets/project-watch.png",
+      githubLink: "https://github.com/Mell-Gitson/E-commerce",
     },
     {
-      id: "project-4",
-      title: "Système de Quiz",
-      description: "Application interactive de quiz avec système de notation.",
-      imgSrc: "/assets/projet-spotify.png",
-      githubLink: "https://github.com/votre-compte/quiz-system",
-      details:
-        "Création d'un système de quiz interactif avec un système de score et de classement. Techno : React, Firebase, Tailwind CSS.",
+      id: 4,
+      title: "Drive'Manage",
+      description: "Application interne de gestion pour auto-école.",
+      image: "/assets/projet-spotify.png",
+      githubLink: "https://github.com/Mell-Gitson/Drive-School-Manage",
     },
   ];
 
@@ -52,9 +46,7 @@ export default function Home() {
     <div className="min-h-screen bg-darkBg-900 text-white">
       <Navbar />
 
-      
       <section className="min-h-[90vh] flex flex-col md:flex-row items-center p-6 md:p-12 pt-20">
-        
         <div className="flex-1 max-w-2xl mx-auto text-center md:text-left mb-8 md:mb-0 md:mr-8">
           <h1 className="text-3xl md:text-6xl font-bold text-cyan-400 mb-4 neon-text">
             Bienvenue sur mon portfolio
@@ -140,7 +132,6 @@ export default function Home() {
                     Mon parcours et Expérience
                   </h3>
 
-                  
                   <div className="mb-6">
                     <div className="flex justify-between items-start">
                       <div>
@@ -204,23 +195,24 @@ export default function Home() {
           {projectsData.map((project, index) => (
             <Card
               key={project.id}
-              id={project.id}
+              projectId={String(project.id)} 
               title={project.title}
               description={project.description}
-              imgSrc={project.imgSrc}
-              index={index}
-              projectDetails={project} 
+              image={project.image} 
+              link={project.githubLink.trim()} 
+              demo={null} 
+              githubButton={true} 
+              reactButton={false} 
+              index={index} 
             />
           ))}
         </div>
       </section>
 
-      
       <section id="skills" className="p-6 md:p-12">
         <Skills />
       </section>
 
-      
       <section id="soft-skills" className="p-6 md:p-12">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl md:text-4xl font-bold text-cyan-400 mb-4 neon-text">

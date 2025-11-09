@@ -1,8 +1,8 @@
+// app/components/Card.jsx
 "use client";
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import Comments from "./Comments";
 import ProjectModal from "./ProjectModal";
 
 const neonColors = [
@@ -33,24 +33,14 @@ const Card = ({
   title, 
   description, 
   image,           
-  link, 
-  demo, 
-  githubButton, 
-  reactButton, 
-  index 
+  index, 
+  projectDetails 
 }) => {
   const colorStyle = neonColors[index % neonColors.length];
   const [showModal, setShowModal] = useState(false);
 
-  
-  const projectDetails = {
-    title,
-    description,
-    image,
-    link,
-    demo,
-    githubButton,
-    reactButton,
+  const openModal = () => {
+    setShowModal(true);
   };
 
   return (
@@ -58,7 +48,7 @@ const Card = ({
       <div className="parent">
         <div
           className="card relative cursor-pointer"
-          onClick={() => setShowModal(true)}
+          onClick={openModal}
         >
           <div className="glass" />
           <div className="content">
@@ -67,7 +57,7 @@ const Card = ({
           </div>
         </div>
 
-        
+        {/* Modal du projet */}
         {showModal && (
           <ProjectModal 
             project={projectDetails} 

@@ -1,83 +1,95 @@
 // app/components/ProjectModal.jsx
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { FaGithub, FaReact, FaTimes } from "react-icons/fa";
-import Link from "next/link";
+import React from "react";
+import { motion } from "framer-motion";
+import Comments from "./Comments"; 
+import { SiGithub } from "react-icons/si"; 
 
-export default function ProjectModal({ project, isOpen, onClose }) {
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === "Escape" && isOpen) onClose();
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [isOpen, onClose]);
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.8 },
+};
 
-  if (!isOpen || !project) return null;
+const backdropVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
-  const { title, description, image, link, demo } = project;
+export default function ProjectModal({ project, onClose }) {
+  if (!project) return null;
+
+  const handleClose = () => {
+    onClose(); 
+  };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-      onClick={onClose}
+    <motion.div
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 pt-20"
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={backdropVariants}
+      onClick={handleClose} 
     >
-      <div
-        className="relative w-full max-w-4xl bg-darkBg-900 rounded-xl border-2 border-neonGreen-500/30 overflow-hidden"
+      
+      <motion.div
+        className="bg-darkBg-800 rounded-xl p-6 max-w-4xl w-full shadow-cyan-green-xl border-2 border-cyan-500/50 relative overflow-y-auto max-h-[80vh] mt-4"
+        variants={modalVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        
         onClick={(e) => e.stopPropagation()}
       >
+        
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 text-white bg-black/50 rounded-full p-2 hover:bg-red-500 transition"
-          aria-label="Fermer"
+          onClick={handleClose} 
+          className="absolute top-4 right-4 text-red-500 hover:text-red-300 font-bold text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-600/20 transition-all duration-300"
         >
-          <FaTimes size={20} />
+          × 
         </button>
-
-        <div className="relative w-full h-64 md:h-80">
-          <Image
-            src={image || "/assets/fallback.png"}
-            alt={title}
-            fill
-            className="object-contain"
-            sizes="(max-width: 768px) 100vw, 800px"
-          />
+        
+        {/* Image du projet */}
+        <div className="mb-6">
+          {project.image && (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-64 object-cover rounded-lg border-2 border-cyan-500/30"
+            />
+          )}
+        </div>
+        
+        
+        <div className="mb-6">
+          <h3 className="text-2xl font-bold text-cyan-400 mb-3">{project.title}</h3>
+          <p className="text-lightText-200 leading-relaxed mb-4">
+            {project.description}
+          </p>
         </div>
 
-        <div className="p-6 text-white">
-          <h3 className="text-2xl font-bold text-neonGreen-400 mb-3">
-            {title}
-          </h3>
-          <p className="text-gray-300 mb-6">{description}</p>
-
-          <div className="flex flex-wrap gap-3">
-            {link && (
-              <Link
-                href={link.trim()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-white hover:text-black transition"
-              >
-                <FaGithub size={20} />
-                GitHub
-              </Link>
-            )}
-            {demo && (
-              <Link
-                href={demo.trim()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-800 transition"
-              >
-                <FaReact size={24} className="animate-spin-slow" />
-                Tester
-              </Link>
-            )}
-          </div>
+        
+        <div className="mb-6">
+          <a
+            href={project.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold rounded-lg hover:shadow-cyan-green hover:scale-105 transition-all duration-300 border border-gray-600"
+          >
+            <SiGithub className="w-5 h-5 mr-2" />
+            Voir sur GitHub
+          </a>
         </div>
-      </div>
-    </div>
+
+        
+        <div className="mt-8 pt-8 border-t border-cyan-500/30">
+          <h4 className="text-xl font-semibold text-cyan-300 mb-4">Commentaires</h4>
+          
+          <Comments projectId={project.id} />
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }

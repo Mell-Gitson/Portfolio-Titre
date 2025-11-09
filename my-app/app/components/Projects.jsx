@@ -19,23 +19,23 @@ export function Projects({ id, title, description, image, index }) {
     );
   }
 
-  // Liste de tes projets réels
+  
   const projects = [
     {
       id: 1,
       title: "MC2",
       description:
         "Application de recherche de films et séries en React et Node.js.",
-      image: "/assets/devbanière.png",
+      image: "./assets/devbanière.png",
       link: "https://github.com/Mell-Gitson/MlCinema",
-      demo: "https://devban.vercel.app",
+      demo: null,
     },
     {
       id: 2,
       title: "dock'uiz",
       description:
         "Mise en place d'un environnement Docker dans une application jeu de quizz.",
-      image: "/assets/annexes-pprod.png",
+      image: "./assets/annexes-pprod.png",
       link: "https://github.com/Mell-Gitson/Micro-services",
       demo: null,
     },
@@ -43,17 +43,17 @@ export function Projects({ id, title, description, image, index }) {
       id: 3,
       title: "Project Watch",
       description: "Suivi de projets en temps réel avec WebSockets.",
-      image: "/assets/project-watch.png",
+      image: "./assets/project_watch_page.png",
       link: "https://github.com/Mell-Gitson/E-commerce",
-      demo: "https://project-watch.vercel.app",
+      demo: null,
     },
     {
       id: 4,
       title: "Drive'Manage",
       description: "Application interne de gestion pour auto-école.",
-      image: "/assets/projet-spotify.png", // ⚠️ À remplacer par la bonne image si possible
+      image: "./assets/projet-spotify.png",
       link: "https://github.com/Mell-Gitson/Drive-School-Manage",
-      demo: "https://drive-manage-mellcanac.vercel.app", // ✅ URL logique (à créer si besoin)
+      demo: null,
     },
   ];
 

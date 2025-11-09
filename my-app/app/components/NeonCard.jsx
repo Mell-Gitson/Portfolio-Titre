@@ -21,7 +21,7 @@ const NeonCard = () => {
       
       <div className="w-[400px] h-[600px] overflow-hidden rounded-xl relative"> 
         <Image
-          src="../assets/cardmc.png"
+          src="../assets/card"
           alt="Carte néon"
           fill
           style={{ objectFit: "cover" }}
