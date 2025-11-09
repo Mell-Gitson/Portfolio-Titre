@@ -1,29 +1,61 @@
 "use client";
 
 import React from "react";
-import Card from "./Card"; 
+import Card from "./Card";
 
-export function Projects({ id, title, description, image, index }) { 
-  
+export function Projects({ id, title, description, image, index }) {
+  // Mode affichage d’un seul projet (optionnel)
   if (id) {
     return (
       <Card
-        id={id}
+        projectId={String(id)}
         title={title}
         description={description}
-        image={image}
-        index={index || 0}
+        image={image || "/assets/fallback.png"}
+        link="#"
+        githubButton={false}
+        reactButton={false}
       />
     );
   }
 
-  
+  // Liste de tes projets réels
   const projects = [
-    { id: 1, title: "Projet 1", description: "Description du projet 1.", image: "../assets/devbanière.png" },
-    { id: 2, title: "Projet 2", description: "Description du projet 2.", image: "../assets/annexes-pprod.png" },
-    { id: 3, title: "Projet 3", description: "Description du projet 3.", image: "../assets/project-watch.png" },
-    { id: 4, title: "Projet 4", description: "Description du projet 4.", image: "../assets/projet-spotify.png" },
-    ];
+    {
+      id: 1,
+      title: "MC2",
+      description:
+        "Application de recherche de films et séries en React et Node.js.",
+      image: "/assets/devbanière.png",
+      link: "https://github.com/Mell-Gitson/MlCinema",
+      demo: "https://devban.vercel.app",
+    },
+    {
+      id: 2,
+      title: "dock'uiz",
+      description:
+        "Mise en place d'un environnement Docker dans une application jeu de quizz.",
+      image: "/assets/annexes-pprod.png",
+      link: "https://github.com/Mell-Gitson/Micro-services",
+      demo: null,
+    },
+    {
+      id: 3,
+      title: "Project Watch",
+      description: "Suivi de projets en temps réel avec WebSockets.",
+      image: "/assets/project-watch.png",
+      link: "https://github.com/Mell-Gitson/E-commerce",
+      demo: "https://project-watch.vercel.app",
+    },
+    {
+      id: 4,
+      title: "Drive'Manage",
+      description: "Application interne de gestion pour auto-école.",
+      image: "/assets/projet-spotify.png", // ⚠️ À remplacer par la bonne image si possible
+      link: "https://github.com/Mell-Gitson/Drive-School-Manage",
+      demo: "https://drive-manage-mellcanac.vercel.app", // ✅ URL logique (à créer si besoin)
+    },
+  ];
 
   return (
     <div className="p-6 bg-darkBg-800/30 backdrop-blur-sm rounded-2xl shadow-neon-green border-2 border-neonGreen-500/20">
@@ -32,13 +64,17 @@ export function Projects({ id, title, description, image, index }) {
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 place-items-center">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <Card
             key={project.id}
-            projectId={String(project.id)} 
+            projectId={String(project.id)}
             title={project.title}
             description={project.description}
-            image={project.image}
+            image={project.image || "/assets/fallback.png"}
+            link={project.link}
+            demo={project.demo}
+            githubButton={true}
+            reactButton={!!project.demo}
             index={index}
           />
         ))}

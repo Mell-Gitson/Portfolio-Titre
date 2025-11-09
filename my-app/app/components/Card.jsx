@@ -28,13 +28,29 @@ const neonColors = [
   },
 ];
 
-const Card = ({ id, title, description, imgSrc, index, projectDetails }) => {
+const Card = ({ 
+  projectId, 
+  title, 
+  description, 
+  image,           
+  link, 
+  demo, 
+  githubButton, 
+  reactButton, 
+  index 
+}) => {
   const colorStyle = neonColors[index % neonColors.length];
-  const [showComments, setShowComments] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => {
-    setShowModal(true);
+  
+  const projectDetails = {
+    title,
+    description,
+    image,
+    link,
+    demo,
+    githubButton,
+    reactButton,
   };
 
   return (
@@ -42,7 +58,7 @@ const Card = ({ id, title, description, imgSrc, index, projectDetails }) => {
       <div className="parent">
         <div
           className="card relative cursor-pointer"
-          onClick={openModal}
+          onClick={() => setShowModal(true)}
         >
           <div className="glass" />
           <div className="content">
@@ -52,8 +68,6 @@ const Card = ({ id, title, description, imgSrc, index, projectDetails }) => {
         </div>
 
         
-
-        {/* Modal du projet */}
         {showModal && (
           <ProjectModal 
             project={projectDetails} 
