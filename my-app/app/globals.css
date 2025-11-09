@@ -131,3 +131,6 @@ body.menu-open {
   
   animation: skillBorderPulse 2s infinite ease-in-out;
 }
+.card {
+  border: 2px solid red; 
+}

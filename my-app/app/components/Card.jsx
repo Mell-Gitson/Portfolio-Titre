@@ -1,4 +1,3 @@
-// app/components/Card.jsx
 "use client";
 
 import React, { useState } from "react";
@@ -6,35 +5,35 @@ import styled from "styled-components";
 import ProjectModal from "./ProjectModal";
 
 const neonColors = [
-  { 
-    bg: "hsl(180, 100%, 25%)", 
+  {
+    bg: "hsl(180, 100%, 25%)",
     glow: "0px 0px 20px hsla(180, 100%, 50%, 0.8), 0px 0px 40px hsla(180, 100%, 50%, 0.4)",
-    border: "hsl(180, 100%, 50%)"
+    border: "hsl(180, 100%, 50%)",
   },
-  { 
-    bg: "hsl(190, 100%, 20%)", 
+  {
+    bg: "hsl(190, 100%, 20%)",
     glow: "0px 0px 20px hsla(190, 100%, 45%, 0.8), 0px 0px 40px hsla(190, 100%, 45%, 0.4)",
-    border: "hsl(190, 100%, 45%)"
+    border: "hsl(190, 100%, 45%)",
   },
-  { 
-    bg: "hsl(170, 100%, 25%)", 
+  {
+    bg: "hsl(170, 100%, 25%)",
     glow: "0px 0px 20px hsla(170, 100%, 50%, 0.8), 0px 0px 40px hsla(170, 100%, 50%, 0.4)",
-    border: "hsl(170, 100%, 50%)"
+    border: "hsl(170, 100%, 50%)",
   },
-  { 
-    bg: "hsl(200, 100%, 20%)", 
+  {
+    bg: "hsl(200, 100%, 20%)",
     glow: "0px 0px 20px hsla(200, 100%, 45%, 0.8), 0px 0px 40px hsla(200, 100%, 45%, 0.4)",
-    border: "hsl(200, 100%, 45%)"
+    border: "hsl(200, 100%, 45%)",
   },
 ];
 
-const Card = ({ 
-  projectId, 
-  title, 
-  description, 
-  image,           
-  index, 
-  projectDetails 
+const Card = ({
+  projectId,
+  title,
+  description,
+  image,
+  index,
+  projectDetails,
 }) => {
   const colorStyle = neonColors[index % neonColors.length];
   const [showModal, setShowModal] = useState(false);
@@ -44,12 +43,20 @@ const Card = ({
   };
 
   return (
-    <StyledWrapper $bgColor={colorStyle.bg} $glowColor={colorStyle.glow} $borderColor={colorStyle.border}>
+    <StyledWrapper
+      $bgColor={colorStyle.bg}
+      $glowColor={colorStyle.glow}
+      $borderColor={colorStyle.border}
+    >
       <div className="parent">
-        <div
-          className="card relative cursor-pointer"
-          onClick={openModal}
-        >
+        <div className="card relative cursor-pointer" onClick={openModal}>
+          <div className="absolute inset-0 rounded-2xl overflow-hidden">
+            <img
+              src={image || "/assets/fallback.png"}
+              alt={title}
+              className="w-full h-full object-cover opacity-30"
+            />
+          </div>
           <div className="glass" />
           <div className="content">
             <span className="title">{title}</span>
@@ -59,9 +66,9 @@ const Card = ({
 
         {/* Modal du projet */}
         {showModal && (
-          <ProjectModal 
-            project={projectDetails} 
-            onClose={() => setShowModal(false)} 
+          <ProjectModal
+            project={projectDetails}
+            onClose={() => setShowModal(false)}
           />
         )}
       </div>
@@ -80,13 +87,15 @@ const StyledWrapper = styled.div`
     height: 100%;
     border-radius: 50px;
     background: ${(props) => props.$bgColor};
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease,
+      border-color 0.3s ease;
     position: relative;
     border: 2px solid ${(props) => props.$borderColor};
 
     &:hover {
       transform: translateY(-5px) scale(1.02);
-      box-shadow: ${(props) => props.$glowColor}, 0px 8px 15px rgba(0, 0, 0, 0.4);
+      box-shadow: ${(props) => props.$glowColor},
+        0px 8px 15px rgba(0, 0, 0, 0.4);
       border-color: ${(props) => props.$borderColor};
     }
   }

@@ -1,58 +1,67 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createSupabaseClient } from "../lib/supabaseClient";
+import { createClient } from "@supabase/supabase-js";
 
 export default function Comments({ projectId }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const supabase = createSupabaseClient(); 
-        const { data, error } = await supabase
-          .from("comments")
-          .select("*")
-          .eq("project_id", projectId)
-          .order("created_at", { ascending: false });
+  
+  const getSupabaseClient = () => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      throw new Error("Supabase env vars missing");
+    }
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+  };
 
-        if (error) {
-          console.error("Erreur Supabase :", error);
-        } else {
-          setComments(data || []);
-        }
-      } catch (err) {
-        console.error("Erreur d'initialisation Supabase :", err.message);
-      }
-    };
+  const loadComments = async () => {
+    try {
+      const supabase = getSupabaseClient();
+      const { data, error } = await supabase
+        .from("comments")
+        .select("*")
+        .eq("project_id", projectId)
+        .order("created_at", { ascending: false });
 
-    fetchComments();
-  }, [projectId]);
+      if (error) throw error;
+      setComments(data || []);
+    } catch (err) {
+      console.error("GET erreur :", err.message);
+    }
+  };
 
-  const handleSubmit = async (e) => {
+  const postComment = async (e) => {
     e.preventDefault();
     if (!username.trim() || !newComment.trim()) return;
 
+    setLoading(true);
     try {
-      const supabase = createSupabaseClient();
+      const supabase = getSupabaseClient();
       const { error } = await supabase
-        .from("commentaires")
+        .from("comments")
         .insert([{ project_id: projectId, username, text: newComment }]);
 
-      if (!error) {
-        setComments((prev) => [
-          { id: Date.now(), username, text: newComment, created_at: new Date().toISOString() },
-          ...prev
-        ]);
-        setUsername("");
-        setNewComment("");
-      }
+      if (error) throw error;
+      await loadComments(); 
+      setUsername("");
+      setNewComment("");
     } catch (err) {
-      console.error("Erreur envoi commentaire :", err.message);
+      console.error("POST erreur :", err.message);
+      alert("Erreur lors de l'envoi.");
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (projectId) loadComments();
+  }, [projectId]);
 
   return (
     <div className="space-y-4">
@@ -68,13 +77,14 @@ export default function Comments({ projectId }) {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-3 space-y-2">
+      <form onSubmit={postComment} className="mt-3 space-y-2">
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Pseudo"
+          placeholder="Nom"
           className="w-full p-2 rounded bg-black/30 text-white border border-cyan-500/30"
+          disabled={loading}
         />
         <textarea
           value={newComment}
@@ -82,12 +92,14 @@ export default function Comments({ projectId }) {
           placeholder="Votre commentaire..."
           rows="2"
           className="w-full p-2 rounded bg-black/30 text-white border border-cyan-500/30"
+          disabled={loading}
         />
         <button
           type="submit"
-          className="w-full py-2 bg-cyan-600 text-black font-semibold rounded hover:bg-cyan-500"
+          className="w-full py-2 bg-cyan-600 text-black font-semibold rounded hover:bg-cyan-500 disabled:opacity-50"
+          disabled={loading}
         >
-          Ajouter
+          {loading ? "Envoi..." : "Ajouter"}
         </button>
       </form>
     </div>

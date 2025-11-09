@@ -195,15 +195,22 @@ export default function Home() {
           {projectsData.map((project, index) => (
             <Card
               key={project.id}
-              projectId={String(project.id)} 
+              projectId={`project-${project.id}`} 
               title={project.title}
               description={project.description}
-              image={project.image} 
-              link={project.githubLink.trim()} 
-              demo={null} 
-              githubButton={true} 
-              reactButton={false} 
-              index={index} 
+              image={project.image}
+              link={project.githubLink.trim()}
+              demo={null}
+              githubButton={true}
+              reactButton={false}
+              index={index}
+              projectDetails={{
+                id: `project-${project.id}`, 
+                title: project.title,
+                description: project.description,
+                image: project.image,
+                githubLink: project.githubLink.trim(),
+              }}
             />
           ))}
         </div>
