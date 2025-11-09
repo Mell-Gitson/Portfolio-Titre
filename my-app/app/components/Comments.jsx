@@ -3,26 +3,21 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
 export default function Comments({ projectId }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
 
-  
-  const getSupabaseClient = () => {
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      throw new Error("Supabase env vars missing");
-    }
-    return createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
-  };
-
   const loadComments = async () => {
+    if (!projectId) return;
     try {
-      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from("comments")
         .select("*")
@@ -32,17 +27,16 @@ export default function Comments({ projectId }) {
       if (error) throw error;
       setComments(data || []);
     } catch (err) {
-      console.error("GET erreur :", err.message);
+      console.error("❌ Erreur chargement :", err.message);
     }
   };
 
-  const postComment = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username.trim() || !newComment.trim()) return;
 
     setLoading(true);
     try {
-      const supabase = getSupabaseClient();
       const { error } = await supabase
         .from("comments")
         .insert([{ project_id: projectId, username, text: newComment }]);
@@ -52,7 +46,7 @@ export default function Comments({ projectId }) {
       setUsername("");
       setNewComment("");
     } catch (err) {
-      console.error("POST erreur :", err.message);
+      console.error("❌ Erreur envoi :", err.message);
       alert("Erreur lors de l'envoi.");
     } finally {
       setLoading(false);
@@ -60,16 +54,17 @@ export default function Comments({ projectId }) {
   };
 
   useEffect(() => {
-    if (projectId) loadComments();
+    loadComments();
   }, [projectId]);
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-2 max-h-40 overflow-y-auto p-2 bg-black/10 rounded">
+    <div className="mt-6">
+      <h4 className="text-lg font-semibold text-cyan-300 mb-3">Commentaires</h4>
+      <div className="space-y-2 max-h-32 overflow-y-auto mb-4 p-2 bg-black/20 rounded">
         {comments.length > 0 ? (
-          comments.map((comment) => (
-            <div key={comment.id} className="text-sm text-gray-300 p-1 border-b border-gray-700">
-              <strong className="text-cyan-400">{comment.username}</strong>: {comment.text}
+          comments.map((c) => (
+            <div key={c.id} className="text-sm text-gray-300">
+              <strong className="text-cyan-400">{c.username}</strong>: {c.text}
             </div>
           ))
         ) : (
@@ -77,12 +72,12 @@ export default function Comments({ projectId }) {
         )}
       </div>
 
-      <form onSubmit={postComment} className="mt-3 space-y-2">
+      <form onSubmit={handleSubmit} className="space-y-2">
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Nom"
+          placeholder="Pseudo"
           className="w-full p-2 rounded bg-black/30 text-white border border-cyan-500/30"
           disabled={loading}
         />
@@ -96,7 +91,7 @@ export default function Comments({ projectId }) {
         />
         <button
           type="submit"
-          className="w-full py-2 bg-cyan-600 text-black font-semibold rounded hover:bg-cyan-500 disabled:opacity-50"
+          className="w-full py-2 bg-cyan-600 text-black font-bold rounded hover:bg-cyan-500 disabled:opacity-50"
           disabled={loading}
         >
           {loading ? "Envoi..." : "Ajouter"}

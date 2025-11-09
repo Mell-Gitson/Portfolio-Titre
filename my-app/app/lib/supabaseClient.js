@@ -1,15 +1,10 @@
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from "../supabaseClient";
 
-export function createSupabaseClient() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_URL is missing');
-  }
-  if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is missing');
-  }
+const SUPABASE_URL = process.env.local.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.local.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  throw new Error("Les variables d'environnement Supabase ne sont pas définies !");
 }
+
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
