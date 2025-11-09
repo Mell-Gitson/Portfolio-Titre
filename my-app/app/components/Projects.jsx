@@ -3,7 +3,7 @@
 import React from "react";
 import Card from "./Card"; 
 
-export function Projects({ id, title, description, imgSrc, index }) { 
+export function Projects({ id, title, description, image, index }) { 
   
   if (id) {
     return (
@@ -11,7 +11,7 @@ export function Projects({ id, title, description, imgSrc, index }) {
         id={id}
         title={title}
         description={description}
-        imgSrc={imgSrc}
+        image={image}
         index={index || 0}
       />
     );
@@ -19,10 +19,10 @@ export function Projects({ id, title, description, imgSrc, index }) {
 
   
   const projects = [
-    { id: 1, title: "Projet 1", description: "Description du projet 1.", imgSrc: "../assets/devbanière.png" },
-    { id: 2, title: "Projet 2", description: "Description du projet 2.", imgSrc: "../assets/annexes-pprod.png" },
-    { id: 3, title: "Projet 3", description: "Description du projet 3.", imgSrc: "../assets/project-watch.png" },
-    { id: 4, title: "Projet 4", description: "Description du projet 4.", imgSrc: "../assets/projet-spotify.png" },
+    { id: 1, title: "Projet 1", description: "Description du projet 1.", image: "../assets/devbanière.png" },
+    { id: 2, title: "Projet 2", description: "Description du projet 2.", image: "../assets/annexes-pprod.png" },
+    { id: 3, title: "Projet 3", description: "Description du projet 3.", image: "../assets/project-watch.png" },
+    { id: 4, title: "Projet 4", description: "Description du projet 4.", image: "../assets/projet-spotify.png" },
     ];
 
   return (
@@ -35,10 +35,10 @@ export function Projects({ id, title, description, imgSrc, index }) {
         {projects.map((project, index) => (
           <Card
             key={project.id}
-            id={project.id}
+            projectId={String(project.id)} 
             title={project.title}
             description={project.description}
-            imgSrc={project.imgSrc}
+            image={project.image}
             index={index}
           />
         ))}
