@@ -111,7 +111,7 @@ export default function ContactForm() {
             className="w-full p-3 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           />
 
-          <NeonButton className="mt-4 w-full item-center" onClick={handleSubmit}>Envoyer</NeonButton>
+          <NeonButton className="mt-4 w-full flex item-center" onClick={handleSubmit}>Envoyer</NeonButton>
         </form>
       )}
     </AnimatedSection>

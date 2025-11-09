@@ -47,16 +47,16 @@ export default function Home() {
     <div className="min-h-screen bg-darkBg-900 text-white">
       <Navbar />
 
-      <section className="min-h-[90vh] flex flex-col md:flex-row items-center p-6 md:p-12 pt-20">
-        <div className="flex-1 max-w-2xl mx-auto text-center md:text-left mb-8 md:mb-0 md:mr-8">
+      <section className="min-h-[90vh] flex flex-col md:flex-row items-center justify-center p-6 md:p-12 pt-32 md:pt-36 gap-8">
+        <div className="flex-1 max-w-2xl text-center md:text-left">
           <h1 className="text-3xl md:text-6xl font-bold text-cyan-400 mb-4 neon-text">
             Bienvenue sur mon portfolio
           </h1>
           <p className="text-lg md:text-xl text-lightText-200 mb-6">
-            Je suis Mell ancien rugbyman reconverti en tant que Développeur Full
-            Stack passionné par l'innovation et la création digitale j'exerce
+            Je suis Mell, ancien rugbyman reconverti en Développeur Full Stack
+            passionné par l'innovation et la création digitale. J'exerce
             également en tant qu'Apprenti Chef de Projet à la Haute Autorité de
-            Santé
+            Santé.
           </p>
           <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4 mb-6">
             <span className="px-3 py-1 md:px-4 md:py-2 bg-cyan-500/20 text-cyan-300 rounded-full text-xs md:text-sm border border-cyan-500/30">
@@ -71,16 +71,15 @@ export default function Home() {
           </div>
           <NeonButton
             as="a"
-            href="/Mell_CANAC_CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 w-full item-center"
+            href="../Mell_CANAC_CV.pdf"
+            download
+            className="mt-4 w-full md:w-auto text-center"
           >
             CV
           </NeonButton>
         </div>
 
-        <div className="hidden md:block">
+        <div className="flex-1 flex justify-center md:justify-end mt-8 md:mt-0">
           <NeonCard />
         </div>
       </section>
