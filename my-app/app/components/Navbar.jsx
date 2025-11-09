@@ -16,7 +16,7 @@ export function Navbar() {
     <nav className="w-full bg-black/30 backdrop-blur-md border-b border-white/10 p-4 transition-colors z-50 relative">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <div className="text-cyan-400 font-bold text-xl neon-glow">M Canac</div>
+        <div className="text-cyan-400 font-bold rounded-lg text-xl neon-glow p-2 m-2">M Canac</div>
 
         {/* Auth Widget */}
         <AuthWidget />
