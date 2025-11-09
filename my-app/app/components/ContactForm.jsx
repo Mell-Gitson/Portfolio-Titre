@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import AnimatedSection from "./AnimatedSection";
+import NeonButton from "./NeonButton";
+
 
 const contactVariants = {
   hidden: { opacity: 0, y: 80 },
@@ -109,13 +111,7 @@ export default function ContactForm() {
             className="w-full p-3 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           />
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition disabled:opacity-50"
-          >
-            {loading ? "Envoi..." : "Envoyer"}
-          </button>
+          <NeonButton className="mt-4 w-full item-center" onClick={handleSubmit}>Envoyer</NeonButton>
         </form>
       )}
     </AnimatedSection>

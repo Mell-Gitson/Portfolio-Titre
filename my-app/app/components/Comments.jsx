@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import NeonButton from "./NeonButton";
 
 
 const supabase = createClient(
@@ -42,7 +43,7 @@ export default function Comments({ projectId }) {
         .insert([{ project_id: projectId, username, text: newComment }]);
 
       if (error) throw error;
-      await loadComments(); 
+      await loadComments();
       setUsername("");
       setNewComment("");
     } catch (err) {
@@ -89,13 +90,9 @@ export default function Comments({ projectId }) {
           className="w-full p-2 rounded bg-black/30 text-white border border-cyan-500/30"
           disabled={loading}
         />
-        <button
-          type="submit"
-          className="w-full py-2 bg-cyan-600 text-black font-bold rounded hover:bg-cyan-500 disabled:opacity-50"
-          disabled={loading}
-        >
+        <NeonButton type="submit" disabled={loading}>
           {loading ? "Envoi..." : "Ajouter"}
-        </button>
+        </NeonButton>
       </form>
     </div>
   );
