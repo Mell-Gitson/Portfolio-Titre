@@ -19,10 +19,10 @@ export function Projects({ id, title, description, imgSrc, index }) {
 
   
   const projects = [
-    { id: 1, title: "Projet 1", description: "Description du projet 1.", imgSrc: "/assets/astro-meté.jpg" },
-    { id: 2, title: "Projet 2", description: "Description du projet 2.", imgSrc: "/assets/devbanière.png" },
-    { id: 3, title: "Projet 3", description: "Description du projet 3.", imgSrc: "/path-to-project3-image.jpg" },
-    { id: 4, title: "Projet 4", description: "Description du projet 4.", imgSrc: "/path-to-project4-image.jpg" },
+    { id: 1, title: "Projet 1", description: "Description du projet 1.", imgSrc: "../assets/devbanière.png" },
+    { id: 2, title: "Projet 2", description: "Description du projet 2.", imgSrc: "../assets/annexes-pprod.png" },
+    { id: 3, title: "Projet 3", description: "Description du projet 3.", imgSrc: "../assets/project-watch.png" },
+    { id: 4, title: "Projet 4", description: "Description du projet 4.", imgSrc: "../assets/projet-spotify.png" },
     ];
 
   return (
